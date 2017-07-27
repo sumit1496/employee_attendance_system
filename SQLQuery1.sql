@@ -1,0 +1,51 @@
+﻿--Select id,monthDate,ISNULL(present, 0 ) as present ,ISNULL(expected, 0 ) as expected,ISNULL(late, 0 ) as late from
+--(select EmployeeId as id,count(Logintime) as present, month(Logintime) as monthDate from tblAttendanceDetails where cast(Logintime as time)< cast('09:20' as time)  group by EmployeeId,month(Logintime)) as tb1
+--				left join 
+--(select EmployeeId,count(Logintime) as late, month(Logintime) as monthDate2 from tblAttendanceDetails where cast(Logintime as time)> cast('09:30' as time)  group by EmployeeId, month(Logintime)) as tb2 
+--on tb1.id=tb2.EmployeeId and tb1.monthDate=tb2.monthDate2
+--				left join
+--(select EmployeeId,count(Logintime) as expected,month(Logintime) as monthDate3 from tblAttendanceDetails where cast(Logintime as time) between cast('09:20' as time) and cast('09:30' as time)  group by EmployeeId,month(Logintime)) as tb3 on tb1.id=tb3.EmployeeId and tb1.monthDate=tb3.monthDate3
+----update tblAttendanceDetails set Logoutime=cast('2017-07-11 17:00:00' as datetime) where EmployeeId=45 and LoginDate=cast('2017-07-11'as datetime)
+--select * from
+--(select EmployeeId as id,count(Logintime) as present, month(Logintime) as monthDate from tblAttendanceDetails where cast(Logintime as time)< cast('09:20' as time)  group by EmployeeId,month(Logintime)) tb1 left join
+--(select EmployeeId,count(Logintime) as expected,month(Logintime) as monthDate2 from tblAttendanceDetails where cast(Logintime as time) between cast('09:20' as time) and cast('09:30' as time)  group by EmployeeId,month(Logintime)) tb2  on tb1.id=tb2.EmployeeId and tb1.monthDate=tb2.monthDate2
+--left join(select EmployeeId,count(Logintime) as late, month(Logintime) as monthDate3 from tblAttendanceDetails where cast(Logintime as time)> cast('09:30' as time)  group by EmployeeId, month(Logintime)) 
+--  tb3 on tb1.id=tb3.EmployeeId and tb1.monthDate=tb3.monthDate3
+--SELECT E.EmployeeId  --assuming ID is the PK of Employee (E)https://i.stack.imgur.com/mN2RJ.png
+--     , E.monthDate
+--     , ISNULL(present, 0 ) as present 
+--     , ISNULL(expected, 0 ) as expected
+--     , ISNULL(late, 0 ) as late 
+--FROM (SELECT distinct EmployeeId , month(Logintime) as monthdate
+--      FROM tblAttendanceDetails) E
+--LEFT JOIN (SELECT EmployeeId as id,count(Logintime) as present, month(Logintime) as monthDate 
+--           FROM tblAttendanceDetails 
+--           WHERE cast(Logintime as time)< cast('09:20' as time)  
+--           GROUP BY  EmployeeId,month(Logintime)) as tb1
+--  on E.EmployeeId = tb1.id and
+--  E.monthdate=tb1.monthdate
+--LEFT JOIN (SELECT EmployeeId,count(Logintime) as late, month(Logintime) as monthDate2 
+--           FROM tblAttendanceDetails 
+--           WHERE cast(Logintime as time)> cast('09:30' as time)  
+--           GROUP BY EmployeeId, month(Logintime)) as tb2 
+--  on E.EmployeeId=tb2.EmployeeId 
+-- and tb1.monthDate=tb2.monthDate2
+--LEFT JOIN (SELECT EmployeeId,count(Logintime) as expected,month(Logintime) as monthDate3 
+--           FROM tblAttendanceDetails 
+--           WHERE cast(Logintime as time) between cast('09:20' as time) and cast('09:30' as time)  
+--           GROUP BY EmployeeId,month(Logintime)) as tb3 
+--  on E.EmployeeId=tb3.EmployeeId 
+-- and tb1.monthDate=tb3.monthDate3
+--declare @session_usr nchar(30)
+--set @session_usr=SESSION_USER
+--SELECT 'This session''s current user is: '+ @session_usr;
+--SELECT distinct EmployeeId as ID 
+--     , month(Logintime) as MonthDate
+--     , sum(case when cast(Logintime as time) < cast('09:20' as time) 
+--                then 1 else 0 end) over (partition by month(Logintime),EmployeeId) as Present 
+--     , sum(case when cast(Logintime as time) between cast('09:20' as time) and cast('09:30' as time)
+--                then 1 else 0 end) over (partition by month(Logintime),EmployeeId)  as Exception 
+--	, sum(case when cast(Logintime as time)> cast('09:30' as time)
+--                then 1 else 0 end) over (partition by month(Logintime),EmployeeId)  as Halfday
+--FROM tblAttendanceDetails E 
+update tblEmployee set ActiveInactive='0' where SkillSet='C/C++'

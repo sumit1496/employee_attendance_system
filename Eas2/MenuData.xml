@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Items>
+  <MenuItem Text="Home" NavigateUrl="~/Home.aspx"/>
+  <MenuItem Text="Masters" NavigateUrl="~/Masters.aspx">
+    <MenuItem Text="Company" NavigateUrl="~/Company.aspx"/>
+    <MenuItem Text="Role" NavigateUrl="~/Role.aspx"/>
+    <MenuItem Text="Employee" NavigateUrl="~/Employee.aspx"/>
+    <MenuItem Text="UserToRolemapping" NavigateUrl="~/UserToRoleMapping.aspx"/>
+  </MenuItem>
+  <MenuItem Text="EmployeeAttendance" NavigateUrl="~/Attendance.aspx"/>
+  <MenuItem Text="Report" NavigateUrl="~/Report.aspx"/>
+</Items>

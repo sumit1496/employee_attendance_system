@@ -1,0 +1,37 @@
+﻿body
+{
+    font-family:Calibri,Verdana,sans-serif;
+    font-size:12pt;
+    background-color:#AAAAAA;
+}
+#MainData{
+    position:relative;
+    width:auto;
+    margin:auto;
+    background-color:white;
+}
+#Header
+{
+    font-size:xx-large;
+    width:auto;
+    height:100px;
+    background-color:#AAAAFF;
+    text-align:center;
+}
+.MenuStyle
+{
+   
+    background-color:blanchedalmond;
+    
+}
+
+#Content
+{
+    width:auto;
+    background-color:#AAAAFF;
+}
+
+.Important {
+    font-size: large;
+    color: Red;
+}
